@@ -1,0 +1,804 @@
+/*====== Общие стили контейнеров и текста ======*/
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100&subset=latin,cyrillic-ext,cyrillic);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
+@import url(http://fonts.googleapis.com/css?family=Abel);
+
+/*======= семейство шрифтов FontAwesome ========*/
+@font-face {
+    font-family: "FontAwesome";
+    src: url("fonts/FontAwesome/fontawesome-webfont.eot");
+    src: url("fonts/FontAwesome/fontawesome-webfont.eot?#iefix")format("embedded-opentype"), url("fonts/FontAwesome/fontawesome-webfont.woff") format("woff"), url("fonts/FontAwesome/fontawesome-webfont.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+html {
+    min-height: 100%;
+    height: 100%;
+}
+
+body {
+    color: #212121;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    padding-bottom: 79px;
+    margin: 0;
+    height: auto;
+    min-height: 100%;
+}
+
+.container {
+    width: 1170px;
+    padding: 0 15px;
+    position: relative;
+    margin: 0 auto;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: #3F51B5;
+    padding: 30px;
+}
+
+ul li {
+    list-style: none;
+}
+
+*, body * {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #3F51B5;
+}
+
+a:hover {
+    outline: none;
+    text-decoration:underline;
+}
+
+a:focus {
+    outline:none;
+    outline-offset: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+h1 {
+    color: #3F51B5;
+    font-size: 40px;
+}
+
+h2 {
+    color: #0e174c;
+    font-size: 35px;
+}
+
+h3 {
+    color: #0e174c;
+    font-size: 30px;
+}
+
+.btn:hover,
+.btn:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.data_item::after, .clear:after, form.middle_form:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+p {
+    color: #212121;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* === формы === */
+
+form.middle_form {
+    display: block;
+    width: 600px;
+}
+
+form.middle_form h2 {
+    margin: 10px;
+    font-size: 25px;
+}
+
+.data_item {
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.data_item label {
+    display: inline-block;
+    width: 35%;
+    text-align: left;
+    float: left;
+    margin-top: 5px;
+}
+
+.data_item input, .data_item textarea {
+    width: 65%;
+    float: right;
+}
+
+.data_item textarea {
+    height: 150px;
+}
+
+/* === формы - end === */
+
+/* === inputs (поля), textarea === */
+
+input:not([type="button"]):not([type="submit"]):not([type="checkbox"]), textarea,
+select {
+    color: #212121;
+    font-size: 16px;
+    font-family: "Roboto";
+    border: 1px solid #ADADAD;
+    background: none;
+    outline: none;
+}
+
+input:not([type="button"]):not([type="submit"]):not([type="checkbox"]), select {
+    height: 32px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+input[type="file"] {
+    padding-top: 3px;
+}
+
+textarea {
+    height: 100px;
+    padding: 5px 15px;
+}
+
+/* === inputs (поля), textarea - end === */
+
+/* === кнопки === */
+
+.btn {
+    color: #212121;
+    font-size: 14px;
+    font-family: "Roboto";
+    text-transform: uppercase;
+    display: block;
+    min-width: 100px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border: 1px solid #DADADA;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 0 20px;
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+.action_btn {
+    font-size: 0;
+    color: #999;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    position: relative;
+}
+
+.action_btn:after {
+    font-size: 20px;
+    line-height: 25px;
+    font-family: "FontAwesome";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.edit_btn:after {
+    content: '\f044';
+}
+
+.edit_btn:hover:after {
+    color: green;
+}
+
+.delete_btn:after {
+    content: '\f00d';
+}
+
+.delete_btn:hover:after {
+    color: red;
+}
+
+.blue_btn {
+    color: #fff;
+    background: #5C6BC0;
+    border: 1px solid #5C6BC0;
+}
+
+.blue_btn:hover {
+    color: #5C6BC0;
+    background: #fff;
+}
+
+.green_btn {
+    color: #fff;
+    background: green;
+    border: 1px solid green;
+}
+
+.green_btn:hover {
+    color: green;
+    background: #fff;
+}
+
+.red_btn {
+    color: #fff;
+    background: red;
+    border: 1px solid red;
+}
+
+.red_btn:hover {
+    color: red;
+    background: #fff;
+}
+
+/* === кнопки - end === */
+
+/* === таблицы === */
+
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+}
+
+table td, table th {
+    padding: 5px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+table tr:first-child {
+    color: #fff;
+    background: #300992;
+}
+
+tr.sum td {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* === таблицы - end === */
+
+/* === сообщения об ошибках / о положительном результате === */
+
+p.ok_message {
+    position: relative;
+    padding-left: 30px;
+}
+
+p.ok_message i {
+    color: green;
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 0;
+}
+
+ul.errors, p.error {
+    background: #dbdbdb;
+    padding: 20px;
+    border: 1px solid red;
+}
+
+p.error {
+    padding: 10px;
+}
+
+/* === сообщения об ошибках / о положительном результате - end  === */
+
+/* === изображения внутри контейнеров === */
+
+.poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* === изображения внутри контейнеров - end === */
+
+/*====== Общие стили контейнеров и текста - end ======*/
+
+/*====== header ======*/
+
+.header_top {
+    background: #3F51B5;
+    padding: 5px 0;
+}
+
+.header_top a, .header_top p, .header_top span, .header_top i {
+    color: #fff;
+}
+
+.header_top ul {
+    margin: 0;
+    padding: 0;
+}
+
+/*== меню пользователя ==*/
+
+.header_top .menu li {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.header_top .menu a {
+    font-size: 14px;
+    position: relative;
+    padding-left: 18px;
+}
+
+.header_top .menu a i {
+    font-size: 16px;
+    display: block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: 0;
+    top: 1px;
+}
+
+/*== меню пользователя - end ==*/
+
+.header_top + .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #5b67ce;
+}
+
+a.logo {
+    font-size: 40px;
+}
+
+a.logo:hover {
+    text-decoration: none;
+}
+
+/*====== header - end ======*/
+
+/*====== content ======*/
+
+header + .container {
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+/*== список концертов ==*/
+
+.event_item {
+    height: 310px;
+    overflow: hidden;
+    border: 1px solid #dbdbdb;
+    padding: 10px 10px 10px 400px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.event_item:last-child {
+    margin-bottom: 0;
+}
+
+.event_item h2 {
+    margin-top: -6px;
+    margin-bottom: 3px;
+}
+
+.event_item .poster {
+    height: calc(100% - 20px);
+    width: 380px;
+    overflow: hidden;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.event_item .announce {
+    height: auto;
+    max-height: 145px;
+    overflow: hidden;
+}
+
+span.item_name {
+    color: #152379;
+    font-weight: 500;
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+}
+
+.make_order_id span.item_name {
+    width: 70px;
+}
+
+.event_item h2 {
+    font-size: 24px;
+}
+
+.event_item h3 {
+    font-size: 20px;
+    margin: 5px 0 0 0;
+    font-weight: 500;
+}
+
+.event_item .announce {
+    height: 120px;
+    overflow: hidden;
+}
+
+.event_item .btn {
+    color: #fff;
+    position: absolute;
+    bottom: 10px;
+    width: 200px;
+    text-decoration: none;
+    background: #5C6BC0;
+}
+
+.event_item .btn:hover {
+    color: #5C6BC0;
+    border-color: #5C6BC0;
+    background: #fff;
+}
+
+.prices .price {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+a.to_event_list {
+    font-size: 20px;
+    display: block;
+    width: 270px;
+    margin: 15px auto 0;
+    position: relative;
+    padding-right: 30px;
+}
+
+a.to_event_list::after {
+    content: '\f101';
+    font-size: 26px;
+    font-family: "FontAwesome";
+    display: block;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 1px;
+    right: 0;
+}
+
+/*== список концертов - end ==*/
+
+/*== страница концерта ==*/
+
+.event_item_id .poster {
+    margin-bottom: 20px;
+    height: 500px;
+}
+
+.event_item_id h3 {
+    margin-bottom: 10px;
+}
+
+.data_item.price {
+    padding-left: 15px;
+}
+
+/* таблица - схема зала */
+
+table.ticket_list td {
+    padding: 0;
+    border-bottom: none;
+}
+
+table.ticket_list tr:first-child {
+    background: none;
+}
+
+td.checkbox {
+    position: relative;
+    padding: 2px;
+    width: 27px;
+    height: 27px;
+}
+
+td.checkbox input[type="checkbox"] {
+    opacity: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+td.checkbox label {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    z-index: 0;
+    background: #3F51B5;
+    border-radius: 3px;
+}
+
+td.checkbox:hover {
+    opacity: 0.8;
+}
+
+td.checkbox input[type="checkbox"]:disabled + label {
+    background: #c9c9c9;
+    cursor: auto;
+}
+
+td.checkbox input[type="checkbox"]:disabled + label:hover {
+    opacity: 1;
+}
+
+td.checkbox .checked + label {
+    background: #fa7e05;
+}
+
+td.checkbox label.checked {
+    background: #FFAB40;
+}
+
+span.place_index {
+    color: #fff;
+    font-size: 11px;
+    line-height: 1;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+
+span.place_index.index_row {
+    top: 2px;
+    bottom: auto;
+    left: 2px;
+    right: auto;
+}
+/* таблица - схема зала - end */
+
+/*== страница концерта - end ==*/
+
+/*== страница оформления заказа ==*/
+
+table.order_ticket_list {
+    width: 350px;
+    text-align: left;
+}
+
+div.make_order .data_item {
+    width: 350px;
+}
+
+/*== страница оформления заказа - end ==*/
+
+/*== кабинет пользователя ==*/
+
+ul.content_menu a {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+}
+
+ul.content_menu i {
+    display: block;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+/*== кабинет пользователя - end ==*/
+
+/*====== content - end ======*/
+
+/*====== footer ======*/
+
+footer p {
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+}
+
+/*====== footer -end ======*/
+
+/*======================== Админка ========================*/
+
+/*== начальная страница админки ==*/
+
+ul.admin_panel {
+    width: 200px;
+    padding: 0;
+}
+
+ul.admin_panel li {
+    margin-bottom: 15px;
+}
+
+ul.admin_panel a.btn {
+    color: #fff;
+}
+
+a.btn.add_event_link {
+
+}
+
+a.btn.event_list_link {
+
+}
+
+a.btn.order_list_link {
+
+}
+
+/*== начальная страница админки - end ==*/
+
+/*== странца добавления концерта ==*/
+
+.data_item.priceList {
+    margin: 15px 0;
+}
+
+.data_item .price {
+    width: 100%;
+    float: left;
+    margin-bottom: 4px;
+}
+
+/*== странца добавления концерта -end ==*/
+
+/*== таблица - список концертов ==*/
+
+table.admin_event_list th {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+table.admin_event_list {
+    border-collapse: collapse;
+}
+
+table.admin_event_list td, table.admin_event_list th {
+    vertical-align: top;
+    text-align: center;
+    padding: 15px 5px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+table.admin_event_list td.announce {
+    text-align: left;
+}
+
+.admin_table_announce {
+    max-height: 110px;
+    overflow: hidden;
+}
+
+table.admin_event_list .poster {
+    height: 100px;
+}
+
+td.poster {
+    width: 140px;
+}
+
+td.title {
+    width: 200px;
+}
+
+td.date {
+    width: 110px;
+}
+
+td.price_zones {
+    width: 150px;
+}
+
+.admin_table_anounce {
+    height: auto;
+    max-height: 160px;
+    overflow: auto;
+}
+
+table.admin_event_list td.price_zones {
+    text-align: left;
+}
+
+table.admin_event_list td.edit,
+table.admin_event_list td.delete {
+    width: 77px;
+    vertical-align: middle;
+}
+
+td.edit, td.delete {
+    text-align: center;
+}
+
+span.curr {
+    display: inline-block;
+    padding-left: 3px;
+}
+
+/*== таблица - список концертов - end ==*/
+
+/*== странца подтверждения удаления концерта ==*/
+
+.delete_buttons, .delete_buttons form.middle_form, .order_del_menu,
+ .order_del_menu form.middle_form, a.btn.to_order_list {
+    width: 250px;
+}
+
+input.btn.delete_btn {
+    width: 100%;
+}
+
+/*== странца подтверждения удаления концерта - end ==*/
+
+/*== страница подтверждения обновления заказа ==*/
+
+input.btn.update_order {
+    margin-top: 20px;
+    width: 250px;
+}
+
+/*== страница подтверждения обновления заказа - end ==*/
+
+
+/*======================== Админка  - end ========================*/
