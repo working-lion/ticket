@@ -30,13 +30,7 @@ class Price {
                 $priceList[$i]['price'] = $row['price'];
                 $i++;
             }
-
-            //проверка
-            /*echo 'концерт'.$eventId;
-            echo '<pre>';
-            print_r($priceList);
-            echo '</pre>';*/
-
+            
             return $priceList;
         }
         return false;

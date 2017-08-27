@@ -32,6 +32,38 @@ class Ticket {
     }
     
     /**
+     * Возвращает список билетов по id концерка
+     */
+    public static function getTicketListByOrderId($orderId) {
+        $db = Db::getConnection();
+        
+        $ticketList = array();
+        //считываем данные о билетах
+        $sql = 'SELECT id, price_id, row, place, event_id, order_id FROM ticket WHERE order_id = :orderId';
+        
+        $result = $db->prepare($sql);
+        $result->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+        $result->execute();
+        
+        $i = 0; //индекс строки
+        while ($row = $result->fetch()) {
+            $ticketList[$i]['id'] = $row['id'];
+            $eventId = $ticketList[$i]['id'];
+            $ticketList[$i]['price_id'] = $row['price_id'];
+            $ticketList[$i]['row'] = $row['row'];
+            $ticketList[$i]['place'] = $row['place'];
+            $ticketList[$i]['eventId'] = $row['event_id'];
+            $ticketList[$i]['orderId'] = $row['order_id'];
+            $i++;
+        }
+        //добавляем цену для каждого билета
+        
+        $ticketList = self::addTicketPrice($ticketList, $eventId);
+        
+        return $ticketList;
+    }
+    
+    /**
      * Возвращает массив с информацией о купленных билетах
      * если билет куплен, то Mas[row][place] = 1
      * @param type $ticketList - массив билетов

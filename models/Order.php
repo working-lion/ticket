@@ -29,7 +29,7 @@ class Order
     * Метод для получения списка заказов
     * @return array - массив данных о заказах
     */
-    public static function getOrderList() {
+    /*public static function getOrderList() {
         $db = Db::getConnection();
         $orderList = array();
         $sql = 'SELECT id, user_email, event_id, date, status FROM user_order ORDER BY date ASC';
@@ -43,23 +43,21 @@ class Order
             $orderList[$i]['date'] = $row['date'];
             $orderList[$i]['status'] = $row['status'];
             $i++;
-        }
+        } 
         return $orderList;
     }
-
+    */
     /**
-    * Метод для получения данных о неоплаченных заказах
-    * @param integer status - статус заказа (0/1)
+    * Метод для получения списка заказов
     * @return array - массив данных о заказах
     */
-    public static function getOrderListForCheck($status) {
+    public static function getOrderList() {
         $db = Db::getConnection();
         $orderList = array();
-        $sql = 'SELECT id, user_email, event_id, date, status FROM'
-                . ' user_order WHERE status = :status ORDER BY date ASC';
+        $sql = 'SELECT id, user_email, event_id, date, status FROM user_order ORDER BY date ASC';
         $result = $db->prepare($sql);
-        $result->bindParam(':status', $status, PDO::PARAM_INT);
         $result->execute();
+        
         $i = 0;//индекс строки
         while($row = $result->fetch()) {
             $orderList[$i]['id'] = $row['id'];
@@ -67,9 +65,57 @@ class Order
             $orderList[$i]['eventId'] = $row['event_id'];
             $orderList[$i]['date'] = $row['date'];
             $orderList[$i]['status'] = $row['status'];
+            
+            //получаем цены на концерты заказов
+            $priceList[$i] = Price::getPricesByEventId($orderList[$i]['eventId']);
+            
             $i++;
         }
+        
+        //добавляем билеты
+        $i = 0;
+        foreach ($orderList as $order) {
+            //добавляем места
+            //$orderList[$i]['places'] = self::getPlacesListByOrderId($order["id"]);
+            
+            //добавляем цены билеты
+            $orderList[$i]['ticketList'] = Ticket::getTicketListByOrderId($order["id"]);
+            
+            $orderPrice = 0;
+            foreach ($orderList[$i]['ticketList'] as $ticket) {
+                foreach($priceList[$i] as $price){
+                    if($ticket["price_id"] == $price["id"]){
+                        $orderPrice += $price["price"];
+                        break;
+                    }
+                }
+            }
+            $orderList[$i]['price'] = $orderPrice;
+            $i++;
+        }      
+        
         return $orderList;
+    }
+
+    /**
+    * Метод для получения списка мест по id заказа
+    * @param integer orderId
+    * @return array - массив данных о местах
+    */
+    public static function getPlacesListByOrderId($orderId) {
+        $db = Db::getConnection();
+        $placesList = array();
+        $sql = 'SELECT row, place FROM ticket WHERE order_id = :orderId ORDER BY row ASC, place ASC';
+        $result = $db->prepare($sql);
+        $result->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+        $result->execute();
+        $i = 0;//индекс строки
+        while($row = $result->fetch()) {
+            $placesList[$i]['row'] = $row['row'];
+            $placesList[$i]['place'] = $row['place'];
+            $i++;
+        }
+        return $placesList;;
     }
 
     /**
@@ -225,7 +271,6 @@ class Order
 
                 //удаляем билеты из этого заказа
                 Ticket::deleteTicketsByOrderId($order['id']);
-                //echo '<p>Удаляем заказ № '.$order['id'].' </p>';
             }
         }
         return true;

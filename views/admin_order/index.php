@@ -13,6 +13,8 @@
                 <th>Почта пользователя</th>
                 <th>id концерта</th>
                 <th>Дата</th>
+                <th>Ряд/место</th>
+                <th>Цена</th>
                 <th>Статус</th>
                 <th>Ред-ть</th>
                 <th>Удалить</th>
@@ -28,8 +30,17 @@
                 <td>
                     <?php echo $orderItem["eventId"]; ?>
                 </td>
-                <td class=""date>
+                <td class="date">
                     <?php echo $orderItem["date"]; ?>
+                </td>
+                <td class="plases">
+                    <?php foreach ($orderItem["ticketList"] as $ticket) {
+                        echo $ticket["row"] . ' / ' . $ticket["place"] . ';<br>';
+                    }
+                    ?>
+                </td>
+                <td class="price">
+                    <?php echo $orderItem['price'] . ' руб.';?>
                 </td>
                 <td>
                     <?php echo ($orderItem["status"]) ? 'Оплачен' : 'В обработке'; ?>

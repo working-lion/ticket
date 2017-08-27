@@ -187,7 +187,7 @@ class Helper{
      */
     public static function formatOrderDateForView($date)
     {
-        $formatedDate = strftime('%k час. %M мин. %d.%m.%G г.', time($date));
+        $formatedDate = date('G час. i мин. d.m.Y г.', strtotime($date));
         return $formatedDate;
     }
 
