@@ -31,7 +31,7 @@ class AdminOrderController extends AdminBase
      * @param integer orderId - id заказа
      * @return boolean
      */
-    ublic function actionUpdate($orderId)
+    public function actionUpdate($orderId)
     {
         // Проверка доступа
         self::checkAdmin();

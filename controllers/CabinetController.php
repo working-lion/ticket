@@ -48,16 +48,16 @@ class CabinetController
 
             $errors = false;
 
-            if (!User::checkName($name)) {
+            if (!Helper::checkName($name)) {
                 $errors[] = 'Имя не должно быть короче 2-х символов.';
             }
 
-            if (!User::checkPassword($password)) {
+            if (!Helper::checkPassword($password)) {
                 $errors[] = 'Пароль не должен быть короче 6-ти символов.';
             }
 
             //добавить проверку почты
-            if (!User::checkEmail($email)) {
+            if (!Helper::checkEmail($email)) {
                 $errors[] = 'Введите правильный адрес электронной почты.';
             }
 
@@ -77,7 +77,7 @@ class CabinetController
     */
     public static function actionOrderList() {
         // Получаем идентификатор пользователя из сессии
-        $userId = User::checkLogged();
+        $userId = Helper::checkLogged();
 
         // Получаем информацию о пользователе из БД
         $user = User::getUserById($userId);

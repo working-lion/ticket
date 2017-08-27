@@ -118,6 +118,20 @@ class Helper{
     }
 
     /**
+     * Метод проверяет, залогинен ли пользователь
+     * @return string
+     */
+        public static function checkLogged()
+    {
+        // Если сессия есть, вернем идентификатор пользователя
+        if (isset($_SESSION['user'])) {
+            return $_SESSION['user'];
+        }
+
+        header("Location: /user/login");
+    }
+
+    /**
      * Метод проверяем существует ли пользователь с заданными $email и $password
      * @param string email
      * @param string password
