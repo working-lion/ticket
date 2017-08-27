@@ -93,7 +93,7 @@ class AdminEventController extends AdminBase {
             }
 
             //проверяем, нет ли в базе концерта в то же время и в том же зале
-            if(!Helper::checSamekDateTimeRoom($date, $time, $roomId)){
+            if(!Helper::checkSameDateTimeRoom($date, $time, $roomId, $eventId)){
                 $errors[] = 'Проверьте правильность даты и времени.
                 Концерт с введённой датой уже добавлен.';
             }
@@ -197,9 +197,11 @@ class AdminEventController extends AdminBase {
             }
 
             //проверяем, нет ли в базе концерта в то же время и в том же зале
-            if(!Helper::checSamekDateTimeRoom($date, $time, $roomId)){
-                $errors[] = 'Проверьте правильность даты и времени.
-                Концерт с введённой датой уже добавлен.';
+            if(!empty($eventId)){
+                if(!Helper::checkSameDateTimeRoom($date, $time, $roomId, $eventId)){
+                    $errors[] = 'Проверьте правильность даты и времени.
+                    Концерт с введённой датой уже добавлен.';
+                }
             }
 
             $currentPrice = 0;

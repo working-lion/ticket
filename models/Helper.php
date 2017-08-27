@@ -39,7 +39,7 @@ class Helper{
      * @param string userTime - время (hh:mm:ss)
      * @return boolean
      */
-    public static function checSamekDateTimeRoom($userDate, $userTime, $userRoomId){
+    public static function checkSameDateTimeRoom($userDate, $userTime, $userRoomId, $eventId){
         //получаем список концертов в выбранном зале
         $eventList = Event::getEventListByRoomId($userRoomId);
 
@@ -51,7 +51,7 @@ class Helper{
         foreach ($eventList as $event) {
             $eventDataTimeStr = $event["date"] . ' ' . $event["time"];
             $eventDataTime = strtotime($eventDataTimeStr);
-            if($userDataTime == $eventDataTime)
+            if($userDataTime == $eventDataTime && $event["id"] != $eventId)
                 return false;
         }
 
@@ -176,7 +176,7 @@ class Helper{
      */
     public static function formatDateForView($date)
     {
-        $formatedDate = strftime('%d.%m.%G г.', time($date));
+        $formatedDate = date('d.m.Y г.', strtotime($date));
         return $formatedDate;
     }
 

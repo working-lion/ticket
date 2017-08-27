@@ -14,7 +14,7 @@ abstract class AdminBase
     public static function checkAdmin()
     {
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
+        $userId = Helper::checkLogged();
 
         // Получаем информацию о текущем пользователе
         $user = User::getUserById($userId);

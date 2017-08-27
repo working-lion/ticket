@@ -14,7 +14,7 @@ class CabinetController
     public function actionIndex()
     {
         // Получаем идентификатор пользователя из сессии
-        $userId = User::checkLogged();
+        $userId = Helper::checkLogged();
 
         // Получаем информацию о пользователе из БД
         $user = User::getUserById($userId);
@@ -30,7 +30,7 @@ class CabinetController
     public function actionEdit()
     {
         // Получаем идентификатор пользователя из сессии
-        $userId = User::checkLogged();
+        $userId = Helper::checkLogged();
 
         // Получаем информацию о пользователе из БД
         $user = User::getUserById($userId);
