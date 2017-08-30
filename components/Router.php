@@ -49,47 +49,101 @@ class Router
                     break;
                 }
 
-                $this->page_404 = 0;
-                //паттерн с регулярным выражением
-                $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-                $segments = explode('/', $internalRoute);
-                $controllerName = array_shift($segments).'Controller';
-                $controllerName = ucfirst($controllerName);//делаем первую букву заглавной
-                $actionName = 'action'.ucfirst((array_shift($segments)));
-                $controllerFile = ROOT . '/controllers/' .$controllerName. '.php';
+                $pageExist = false;
 
-                //подключаем файл класса контроллера
-                if (file_exists($controllerFile)) {
-                    include_once($controllerFile);
-                }
+                $uriPatternArr = explode('/', $uriPattern);
+                $uriArr = explode('/', $uri);
 
-                $controllerObject = new $controllerName;
+                /*
 
-                //параметры (категория и id)
-                $result = null;
-
-                if(!empty($segments) > 0){
-                    $parameters = $segments;
-                    try {
-                        $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
-                    } catch (Exception $e) {
-                        $this->page_404 = 1;
+                //echo "<pre>"; var_dump($matches); echo "</pre>";
+                echo '$uriPattern : ' . $uriPattern . '<br>';
+                //echo '$path : ' . $path . '<br>';
+                echo '$uri : ' . $uri . '<br>';
+                echo '<br>';
+                echo 'count($uriPatternArr) = ' . count($uriPatternArr) . '; count($uri) = ' . count($uri);
+                echo '<br>';
+                echo '$uriPatternArr<br>';
+                echo "<pre>"; var_dump($uriPatternArr); echo "</pre>";
+                echo '$uriArr<br>';
+                echo "<pre>"; var_dump($uriArr); echo "</pre>";
+*/
+                //если число элементов шаблона в роуте и в адресе совпадает
+                if(count($uriPatternArr) == count($uriArr)) {
+                  //сравниваем поэлементно шаблон роута и адрес
+                  $countTrue = 0;
+                  foreach ($uriPatternArr as $key => $uriElem) {
+                    if(strcmp($uriPatternArr[$key], $uriArr[$key]) == 0){
+                      $countTrue++;
                     }
-                    break;
+                    elseif(!empty(preg_match($uriPatternArr[$key], $uriArr[$key]))) {
+                      $countTrue++;
+                    }
+                  }
+                  if($countTrue == count($uriPatternArr)) {
+                    $pageExist = true;
+                  }
                 }
                 else {
-                    try {
-                        $result = call_user_func(array($controllerObject, $actionName));
-                    }
-                    catch (Exception $e) {
-                        $this->page_404 = 1;
-                    }
-                    break;
+                  $pageExist = false;
                 }
 
-                if ($result != null) {
-                    $this->page_404 = 1;
-                    break;
+                //сравниваем $uri и $uriPattern, чтобы отловить 404
+                if ($pageExist)
+                {
+                  $this->page_404 = 0;
+                  //паттерн с регулярным выражением
+                  $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
+                  $segments = explode('/', $internalRoute);
+                  $controllerName = array_shift($segments).'Controller';
+                  $controllerName = ucfirst($controllerName);//делаем первую букву заглавной
+                  $actionName = 'action'.ucfirst((array_shift($segments)));
+                  $controllerFile = ROOT . '/controllers/' .$controllerName. '.php';
+
+                  //подключаем файл класса контроллера
+                  if (file_exists($controllerFile)) {
+                      include_once($controllerFile);
+                  }
+
+                  $controllerObject = new $controllerName;
+
+                  //параметры (категория и id)
+                  $result = null;
+
+                  if(!empty($segments) > 0){
+                      $parameters = $segments;
+                      try {
+                        if (method_exists($controllerObject, $actionName)){
+                          $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
+                        }
+                      } catch (Exception $e) {
+                          $this->page_404 = 1;
+                      }
+                      break;
+                  }
+                  else {
+                      try {
+                        if (method_exists($controllerObject, $actionName)){
+                          $result = call_user_func(array($controllerObject, $actionName));
+                        }
+                        else {
+                          $this->page_404 = 1;
+                        }
+
+                      }
+                      catch (Exception $e) {
+                          $this->page_404 = 1;
+                      }
+                      break;
+                  }
+
+                  if ($result != null) {
+                      $this->page_404 = 1;
+                      break;
+                  }
+                }
+                else {
+                  $this->page_404 = 1;
                 }
             }
             $num_path ++;
