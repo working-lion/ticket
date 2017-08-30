@@ -54,20 +54,6 @@ class Router
                 $uriPatternArr = explode('/', $uriPattern);
                 $uriArr = explode('/', $uri);
 
-                /*
-
-                //echo "<pre>"; var_dump($matches); echo "</pre>";
-                echo '$uriPattern : ' . $uriPattern . '<br>';
-                //echo '$path : ' . $path . '<br>';
-                echo '$uri : ' . $uri . '<br>';
-                echo '<br>';
-                echo 'count($uriPatternArr) = ' . count($uriPatternArr) . '; count($uri) = ' . count($uri);
-                echo '<br>';
-                echo '$uriPatternArr<br>';
-                echo "<pre>"; var_dump($uriPatternArr); echo "</pre>";
-                echo '$uriArr<br>';
-                echo "<pre>"; var_dump($uriArr); echo "</pre>";
-*/
                 //если число элементов шаблона в роуте и в адресе совпадает
                 if(count($uriPatternArr) == count($uriArr)) {
                   //сравниваем поэлементно шаблон роута и адрес
